@@ -19,7 +19,6 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final BlogRepository blogRepository;
-    private boolean aBoolean;
 
     // Los posts se registran siempre en estado borrador, asi que por dia se puede tener mas de un post siempre y cuando esten en borradores.
     @Override

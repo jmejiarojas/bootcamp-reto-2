@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "autores")
+@Table(name = "authors")
 @Getter
 @Setter
 public class Author {
@@ -15,7 +15,7 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
-    private String nombre;
+    private String name;
     private String email;
     private String phone;
     @Column(name = "birth_date")

@@ -31,7 +31,7 @@ public class AuthorServiceImp implements AuthorService {
 
     private Author authorRequestToAuthor(AuthorRequest authorRequest) {
         Author author = new Author();
-        author.setNombre(authorRequest.getName());
+        author.setName(authorRequest.getName());
         author.setEmail(authorRequest.getEmail());
         author.setPhone(authorRequest.getName());
         author.setBirthDate(authorRequest.getBirthDate());
