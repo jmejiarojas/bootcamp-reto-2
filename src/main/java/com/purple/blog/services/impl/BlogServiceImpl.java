@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -45,6 +46,11 @@ public class BlogServiceImpl implements BlogService {
         var blog = blogRepository.findById(id).get();
         blog.setStatus(estado);
         return this.blogRepository.save(blog);
+    }
+
+    @Override
+    public Optional<Blog> findById(Long id) {
+        return this.blogRepository.findById(id);
     }
 
     private long diffDates(Date fechaInicial, Date fechaFinal) {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -52,6 +53,11 @@ public class PostServiceImpl implements PostService {
 
         post.setStatus("publicado");
         return this.postRepository.save(post);
+    }
+
+    @Override
+    public Optional<Post> findById(Long id) {
+        return this.postRepository.findById(id);
     }
 
     // La fecha no deberia ser ingresada por el usuario, ya que la fecha es la del dia

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "autores")
+@Table(name = "posts")
 @Getter
 @Setter
 public class Post {
@@ -18,7 +18,7 @@ public class Post {
     private Date date;
     private String status;
     private String content;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name = "blog_id")
     private Blog blog;
 }

@@ -4,6 +4,8 @@ import com.purple.blog.dtos.AuthorRequest;
 import com.purple.blog.entities.Author;
 import com.purple.blog.services.AuthorService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,7 +21,12 @@ public class AuthorController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id){
-        this.authorService.delete(id);
+    public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id){
+        try {
+            authorService.delete(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

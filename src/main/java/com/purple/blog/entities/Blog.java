@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "autores")
+@Table(name = "blogs")
 @Getter
 @Setter
 public class Blog {
@@ -17,7 +17,7 @@ public class Blog {
     private String description;
     private String url;
     private String status;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name = "autor_id")
     private Author author;
 }

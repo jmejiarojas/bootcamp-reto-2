@@ -25,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
                 .findById(commentRequest.getPost().getId())
                 .orElseThrow(() -> new IllegalArgumentException("No existe el Post con ese id"));
 
-        if(post.getStatus().equals("inactivo")) {
+        if(post.getStatus().equals("borrador")) {
             throw new Exception("Solo se puede registrar comentarios en post en estado publicado");
         }
 
@@ -35,7 +35,6 @@ public class CommentServiceImpl implements CommentService {
     private Comment commentDtoToComment(CommentRequest commentRequest) {
         Comment comment = new Comment();
         comment.setDate(new Date());
-        comment.setEstado(commentRequest.getEstado());
         comment.setName(commentRequest.getName());
         Post post = new Post();
         post.setId(commentRequest.getPost().getId());

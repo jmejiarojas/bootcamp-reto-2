@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "autores")
+@Table(name = "comments")
 @Getter
 @Setter
 public class Comment {
@@ -17,8 +17,7 @@ public class Comment {
     private Long id;
     private Date date;
     private String name;
-    private String estado;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name = "post_id")
     private Post post;
 }

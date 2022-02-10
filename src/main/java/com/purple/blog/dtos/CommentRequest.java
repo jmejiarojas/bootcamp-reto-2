@@ -9,5 +9,4 @@ import lombok.Setter;
 public class CommentRequest {
     private String name;
     private Post post;
-    private String estado;
 }

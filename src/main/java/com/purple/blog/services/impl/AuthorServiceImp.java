@@ -2,6 +2,8 @@ package com.purple.blog.services.impl;
 
 import com.purple.blog.dtos.AuthorRequest;
 import com.purple.blog.entities.Author;
+import com.purple.blog.entities.Blog;
+import com.purple.blog.entities.Post;
 import com.purple.blog.repositories.AuthorRepository;
 import com.purple.blog.repositories.BlogRepository;
 import com.purple.blog.repositories.CommentRepository;
@@ -9,6 +11,11 @@ import com.purple.blog.repositories.PostRepository;
 import com.purple.blog.services.AuthorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -25,8 +32,22 @@ public class AuthorServiceImp implements AuthorService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
-        this.authorRepository.deleteById(id);
+
+        Author author = this.authorRepository.findById(id).get();
+        //Buscamos todos los blogs del Autor
+        List<Blog> blogs = this.blogRepository.findByAuthor_Id(author.getId());
+
+        List<List<Post>> postsLis = blogs.stream().map(blog -> this.postRepository.findByBlog_Id(blog.getId())).collect(Collectors.toList());
+
+        System.out.println(postsLis);
+        //this.authorRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Author> findById(Long id) {
+        return this.authorRepository.findById(id);
     }
 
     private Author authorRequestToAuthor(AuthorRequest authorRequest) {

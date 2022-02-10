@@ -4,7 +4,11 @@ import com.purple.blog.dtos.PostRequest;
 import com.purple.blog.entities.Post;
 import com.purple.blog.services.PostService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("posts")
@@ -19,8 +23,14 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public Post publicar(@PathVariable("id") Long id) throws Exception {
-        return this.postService.publicar(id);
+    public ResponseEntity<Post> publicar(@PathVariable("id") Long id) throws Exception {
+
+        Optional<Post> optionalPost = this.postService.findById(id);
+        if(optionalPost.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(this.postService.publicar(id), HttpStatus.OK);
     }
 
 }
