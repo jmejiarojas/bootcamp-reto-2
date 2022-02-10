@@ -1,0 +1,2 @@
+INSERT INTO author (name,email,phone,birthDate) VALUES ( 'Luis Alfaro', 'luisalfaro@gmail.com','123456789','1987-01-30T11:00');
+INSERT INTO author (name,email,phone,birthDate) VALUES ( 'John Doe', 'johdoe@gmail.com','123456788','1990-02-30T11:00');
