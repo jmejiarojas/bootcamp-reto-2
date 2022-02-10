@@ -4,10 +4,10 @@ import com.purple.blog.dtos.BlogRequest;
 import com.purple.blog.entities.Blog;
 import com.purple.blog.services.BlogService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.Pattern;
+
 
 @RestController
 @RequestMapping("blogs")
@@ -19,6 +19,11 @@ public class BlogController {
     @PostMapping
     public Blog save(@RequestBody BlogRequest blog) throws Exception {
         return this.blogService.save(blog);
+    }
+
+    @PutMapping("/{id}")
+    public Blog updateStatus(@PathVariable("id") Long id, @Pattern(regexp = "activo|inactivo") @RequestParam String estado){
+        return this.blogService.updateStatus(id, estado);
     }
 
 }

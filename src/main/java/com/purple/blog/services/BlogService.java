@@ -5,5 +5,5 @@ import com.purple.blog.entities.Blog;
 
 public interface BlogService {
     Blog save (BlogRequest blog) throws Exception;
-    Blog update(Long id, String estado);
+    Blog updateStatus(Long id, String estado);
 }

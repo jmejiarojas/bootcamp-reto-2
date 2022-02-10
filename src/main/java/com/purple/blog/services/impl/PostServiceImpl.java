@@ -58,7 +58,6 @@ public class PostServiceImpl implements PostService {
     // La fecha no deberia ser ingresada por el usuario, ya que la fecha es la del dia
     private Post postDtoToPost(PostRequest postDto) {
         Post post = new Post();
-        post.setId(postDto.getId());
         post.setTitle(postDto.getTitle());
         post.setStatus("borrador");
         post.setContent(postDto.getContent());

@@ -41,7 +41,7 @@ public class BlogServiceImpl implements BlogService {
 
     // Solo se actualizara el estado del blog
     @Override
-    public Blog update(Long id, String estado) {
+    public Blog updateStatus(Long id, String estado) {
         var blog = blogRepository.findById(id).get();
         blog.setStatus(estado);
         return this.blogRepository.save(blog);
