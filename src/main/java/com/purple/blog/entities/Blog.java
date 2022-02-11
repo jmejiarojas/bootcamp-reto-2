@@ -11,7 +11,6 @@ import java.util.List;
 @Table(name = "blogs")
 @Getter
 @Setter
-@ToString
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )

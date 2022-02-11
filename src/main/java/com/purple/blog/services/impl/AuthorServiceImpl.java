@@ -44,14 +44,12 @@ public class AuthorServiceImpl implements AuthorService {
         //Buscamos todos los blogs del Autor
         List<Blog> blogs = this.blogRepository.findByAuthor_Id(author.getId());
 
-        System.out.println(blogs);
-
         Map<Long, List<Post>> mapBlog = blogs.stream()
                 .collect(Collectors.toMap(Blog::getId, Blog::getPosts));
 
         mapBlog.forEach((aLong, posts) ->
         {
-            Map<Long, List<Comment>> mapComment = posts.stream().collect(Collectors.toMap(post -> post.getId(), post -> post.getComments()));
+            Map<Long, List<Comment>> mapComment = posts.stream().collect(Collectors.toMap(Post::getId, Post::getComments));
             mapComment.forEach((aLong1, comments) -> this.commentRepository.deleteAll(comments));
             this.postRepository.deleteAll(posts);
         });
