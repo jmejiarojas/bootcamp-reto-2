@@ -3,6 +3,7 @@ package com.purple.blog.services.impl;
 import com.purple.blog.dtos.AuthorRequest;
 import com.purple.blog.entities.Author;
 import com.purple.blog.entities.Blog;
+import com.purple.blog.entities.Comment;
 import com.purple.blog.entities.Post;
 import com.purple.blog.repositories.AuthorRepository;
 import com.purple.blog.repositories.BlogRepository;
@@ -13,10 +14,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -45,6 +49,15 @@ public class AuthorServiceImpl implements AuthorService {
         Map<Long, List<Post>> mapBlog = blogs.stream()
                 .collect(Collectors.toMap(Blog::getId, Blog::getPosts));
 
+        mapBlog.forEach((aLong, posts) ->
+        {
+            Map<Long, List<Comment>> mapComment = posts.stream().collect(Collectors.toMap(post -> post.getId(), post -> post.getComments()));
+            mapComment.forEach((aLong1, comments) -> this.commentRepository.deleteAll(comments));
+            this.postRepository.deleteAll(posts);
+        });
+
+        this.blogRepository.deleteAll(blogs);
+        this.authorRepository.deleteById(id);
     }
 
     @Override

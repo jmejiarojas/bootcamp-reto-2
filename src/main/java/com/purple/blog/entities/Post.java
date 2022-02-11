@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -23,4 +24,6 @@ public class Post {
     @JoinColumn(name = "blog_id")
     @JsonIgnoreProperties(value="posts")
     private Blog blog;
+    @OneToMany( mappedBy = "post")
+    private List<Comment> comments;
 }
