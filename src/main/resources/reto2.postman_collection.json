@@ -8,45 +8,125 @@
 		{
 			"name": "Save Blog",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
-				"url": null
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"blog04\",\n    \"description\":\"Blog de chico menor de edad\",\n    \"url\": \"Esta es la url 01\",\n    \"status\": \"activo\",\n    \"author\":{\n        \"id\":1\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/blogs",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blogs"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Update status blog",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "localhost:8080/blogs/1?estado=inactivo",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blogs",
+						"1"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "inactivo"
+						}
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Save Post",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
-				"url": null
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Mi post04\",\n    \"content\": \"Este es el contenido 01\",\n    \"blog\": {\n        \"id\":3\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/posts",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"posts"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Publicar Post",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "localhost:8080/posts/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"posts",
+						"2"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Save Comment",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
-				"url": null
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Este es mi comentario del post01\",\n    \"post\": {\n        \"id\":1\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/comments",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comments"
+					]
+				}
 			},
 			"response": []
 		},
@@ -64,6 +144,33 @@
 					"path": [
 						"authors",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Author",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Julio\",\n    \"email\":\"julio@gmail.com\",\n    \"phone\":\"222333666\",\n    \"birthDate\":\"2010-02-15T11:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/authors",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"authors"
 					]
 				}
 			},
