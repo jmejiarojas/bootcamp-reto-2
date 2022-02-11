@@ -14,12 +14,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class AuthorServiceImp implements AuthorService {
+public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
     private final BlogRepository blogRepository;
@@ -39,10 +40,11 @@ public class AuthorServiceImp implements AuthorService {
         //Buscamos todos los blogs del Autor
         List<Blog> blogs = this.blogRepository.findByAuthor_Id(author.getId());
 
-        List<List<Post>> postsLis = blogs.stream().map(blog -> this.postRepository.findByBlog_Id(blog.getId())).collect(Collectors.toList());
+        System.out.println(blogs);
 
-        System.out.println(postsLis);
-        //this.authorRepository.deleteById(id);
+        Map<Long, List<Post>> mapBlog = blogs.stream()
+                .collect(Collectors.toMap(Blog::getId, Blog::getPosts));
+
     }
 
     @Override

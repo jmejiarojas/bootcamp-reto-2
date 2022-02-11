@@ -1,5 +1,6 @@
 package com.purple.blog.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,5 +21,6 @@ public class Post {
     private String content;
     @ManyToOne()
     @JoinColumn(name = "blog_id")
+    @JsonIgnoreProperties(value="posts")
     private Blog blog;
 }

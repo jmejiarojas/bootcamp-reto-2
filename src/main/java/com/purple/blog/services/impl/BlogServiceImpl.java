@@ -9,9 +9,11 @@ import com.purple.blog.services.BlogService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @AllArgsConstructor
@@ -34,7 +36,7 @@ public class BlogServiceImpl implements BlogService {
 
         // Validamos cuantos blogs tiene el author
         int numeroBlogs = blogRepository.findByAuthor_Id(blogRequest.getAuthor().getId()).size();
-        if(numeroBlogs > 3) {
+        if(numeroBlogs >= 3) {
             throw new Exception("El author debe tener maximo 3 blogs");
         }
         return blogRepository.save(this.blogDtoToBlog(blogRequest));
@@ -53,9 +55,10 @@ public class BlogServiceImpl implements BlogService {
         return this.blogRepository.findById(id);
     }
 
-    private long diffDates(Date fechaInicial, Date fechaFinal) {
-        long diffInMillies = Math.abs(fechaFinal.getTime() - fechaInicial.getTime());
-        return TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    private int diffDates(Date fechaNac, Date fechaActual) {
+        LocalDate birthDate = fechaNac.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate currentDate = fechaActual.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return Period.between(birthDate, currentDate).getYears();
     }
 
     private Blog blogDtoToBlog(BlogRequest blogRequest){

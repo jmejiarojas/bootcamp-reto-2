@@ -2,13 +2,16 @@ package com.purple.blog.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "blogs")
 @Getter
 @Setter
+@ToString
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
@@ -20,4 +23,6 @@ public class Blog {
     @ManyToOne()
     @JoinColumn(name = "autor_id")
     private Author author;
+    @OneToMany( mappedBy = "blog")
+    private List<Post> posts;
 }
