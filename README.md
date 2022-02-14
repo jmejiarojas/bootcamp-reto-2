@@ -58,7 +58,7 @@
 
 ![](https://github.com/jmejiarojas/bootcamp-reto-2/blob/master/src/main/resources/documentation/publicar-mas-un-dia.gif)
 
-### Solo se pueden registrar posts en estado publicado
+### Solo se pueden registrar comentarios en posts con estado publicado
 
 - Intentaremos crear un comentario en el post con id es igual 2 cuyo estado es borrador, no es permitido por regla de negocio.
 - Registraremos un comentario en el post cuyo id es igual a 1 que se ha publicado en el paso anterior.
